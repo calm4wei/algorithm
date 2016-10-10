@@ -88,7 +88,7 @@ public class BinaryTreeNode {
      * @param btn
      */
     void levelOrderTraversal(List<BinaryTreeNode> btn) {
-        List<BinaryTreeNode> newBtn = new ArrayList<>();
+        List<BinaryTreeNode> newBtn = new ArrayList<BinaryTreeNode>();
         for (BinaryTreeNode b : btn) {
             System.out.println(b.value);
             if (b.leftNode != null) {

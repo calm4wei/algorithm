@@ -2,6 +2,7 @@ package com.alfer.algorithms;
 
 /**
  * Created on 2016/9/30
+ * 排序算法
  *
  * @author feng.wei
  */

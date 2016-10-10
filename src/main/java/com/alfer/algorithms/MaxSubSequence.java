@@ -14,6 +14,14 @@ public class MaxSubSequence {
         sumn(1000000, 3);
     }
 
+    /**
+     * T(n)
+     * T(n^2)
+     * 时间复杂度比较
+     *
+     * @param n
+     * @param model
+     */
     public static void sumn(int n, int model) {
         long sum = 0;
         long t1 = System.currentTimeMillis();
@@ -37,6 +45,12 @@ public class MaxSubSequence {
     }
 
 
+    /**
+     * 原始计算数组的中子序列的最大和算法
+     *
+     * @param a
+     * @return
+     */
     public static int maxSumRec2(int[] a) {
         int maxSum = 0;
         for (int i = 0; i < a.length; i++) {
@@ -51,6 +65,14 @@ public class MaxSubSequence {
         return maxSum;
     }
 
+    /**
+     * 采用分治算法
+     *
+     * @param a
+     * @param left
+     * @param right
+     * @return
+     */
     public static int maxSumRec3(int[] a, int left, int right) {
         if (left == right) {
             return left;
@@ -80,6 +102,14 @@ public class MaxSubSequence {
 
     }
 
+    /**
+     * 求三个整数中的最大值
+     *
+     * @param a
+     * @param b
+     * @param c
+     * @return
+     */
     public static int max3(int a, int b, int c) {
         int max;
         if (a > b) {
