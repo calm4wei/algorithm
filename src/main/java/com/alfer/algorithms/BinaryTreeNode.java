@@ -9,11 +9,15 @@ import java.util.List;
  *
  * @author feng.wei
  */
-public class BinaryTreeNode {
+public class BinaryTreeNode implements Cloneable {
 
     Integer value;
     BinaryTreeNode leftNode;
     BinaryTreeNode rightNode;
+
+    public BinaryTreeNode() {
+
+    }
 
     public BinaryTreeNode(Integer value, BinaryTreeNode leftNode, BinaryTreeNode rightNode) {
         this.value = value;
@@ -29,7 +33,7 @@ public class BinaryTreeNode {
      */
     void preOrderTraversal(BinaryTreeNode btn) {
         if (btn != null) {
-            System.out.println(btn.value);
+            System.out.print(btn.value + ", ");
             if (btn.leftNode != null) {
                 preOrderTraversal(btn.leftNode);
             }
@@ -51,13 +55,13 @@ public class BinaryTreeNode {
             if (btn.leftNode != null) {
                 inOrderTraversal(btn.leftNode);
             }
-//            System.out.println("Left tree traversal is over.");
-            System.out.println(btn.value);
-//            System.out.println("Root tree traversal is over.");
+//            System.out.print("Left tree traversal is over.");
+            System.out.print(btn.value + ", ");
+//            System.out.print("Root tree traversal is over.");
             if (btn.rightNode != null) {
                 inOrderTraversal(btn.rightNode);
             }
-//            System.out.println("Right tree traversal is over.");
+//            System.out.print("Right tree traversal is over.");
         }
     }
 
@@ -72,13 +76,13 @@ public class BinaryTreeNode {
             if (btn.leftNode != null) {
                 postOrderTraversal(btn.leftNode);
             }
-//            System.out.println("Left tree traversal is over.");
+//            System.out.print("Left tree traversal is over.");
             if (btn.rightNode != null) {
                 postOrderTraversal(btn.rightNode);
             }
-//            System.out.println("Right tree traversal is over.");
-            System.out.println(btn.value);
-//            System.out.println("Root tree traversal is over.");
+//            System.out.print("Right tree traversal is over.");
+            System.out.print(btn.value + ", ");
+//            System.out.print("Root tree traversal is over.");
         }
     }
 
@@ -90,7 +94,7 @@ public class BinaryTreeNode {
     void levelOrderTraversal(List<BinaryTreeNode> btn) {
         List<BinaryTreeNode> newBtn = new ArrayList<BinaryTreeNode>();
         for (BinaryTreeNode b : btn) {
-            System.out.println(b.value);
+            System.out.print(b.value + ", ");
             if (b.leftNode != null) {
                 newBtn.add(b.leftNode);
             }
@@ -104,7 +108,40 @@ public class BinaryTreeNode {
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * 二叉树镜像
+     *
+     * @param treeNode
+     */
+    void mirrorTree(BinaryTreeNode treeNode) {
+        if (null == treeNode) {
+            return;
+        }
+//        mirrorTreeNode = new BinaryTreeNode(treeNode.value, treeNode.rightNode, treeNode.leftNode);
+
+        BinaryTreeNode tmp = treeNode.leftNode;
+        treeNode.leftNode = treeNode.rightNode;
+        treeNode.rightNode = tmp;
+        if (treeNode.leftNode != null) {
+            mirrorTree(treeNode.leftNode);
+        }
+
+        if (treeNode.rightNode != null) {
+            mirrorTree(treeNode.rightNode);
+        }
+
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        BinaryTreeNode node = null;
+        node = (BinaryTreeNode) super.clone();
+        node.leftNode = (BinaryTreeNode) leftNode.clone();
+        node.rightNode = (BinaryTreeNode) rightNode.clone();
+        return node;
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
         BinaryTreeNode tree7 = new BinaryTreeNode(50, null, null);
         BinaryTreeNode tree6 = new BinaryTreeNode(40, null, null);
         BinaryTreeNode tree5 = new BinaryTreeNode(4, null, null);
@@ -113,12 +150,26 @@ public class BinaryTreeNode {
         BinaryTreeNode tree2 = new BinaryTreeNode(2, tree4, tree5);
         BinaryTreeNode tree1 = new BinaryTreeNode(1, tree2, tree3);
 
+        // 先序遍历
 //        tree1.preOrderTraversal(tree1);
+        // 中序遍历
 //        tree1.inOrderTraversal(tree1);
+        // 后序遍历
 //        tree1.postOrderTraversal(tree1);
-        List<BinaryTreeNode> list = new ArrayList<BinaryTreeNode>();
-        list.add(tree1);
-        tree1.levelOrderTraversal(list);
+
+        // test 层序遍历
+//        List<BinaryTreeNode> list = new ArrayList<BinaryTreeNode>();
+//        list.add(tree1);
+//        tree1.levelOrderTraversal(list);
+
+        // 二叉树镜像
+//        BinaryTreeNode copyTree = (BinaryTreeNode) tree1.clone();
+        tree1.preOrderTraversal(tree1);
+        System.out.println();
+        System.out.println("===================");
+        tree1.mirrorTree(tree1);
+        tree1.preOrderTraversal(tree1);
+
     }
 
 }
