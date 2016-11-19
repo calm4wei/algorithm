@@ -1,4 +1,5 @@
 .idea/*
 *.iml
+*.im
 out/*
 target/*
