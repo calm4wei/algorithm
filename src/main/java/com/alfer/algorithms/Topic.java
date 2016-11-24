@@ -1,7 +1,6 @@
 package com.alfer.algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,7 +42,7 @@ public class Topic {
 
             int k = 0;
             List<Integer> currentOrder = new ArrayList<Integer>();
-            for (Integer n : nextOrder){
+            for (Integer n : nextOrder) {
                 currentOrder.add(n);
             }
             for (int i = 0; i < (currentOrder.size()); i = i + 2) {
@@ -67,16 +66,56 @@ public class Topic {
         }
     }
 
-    public static void main(String[] args) {
-        int[][] w = {
-                {0, 0, 2, 0},
-                {0, 1, 1, 3},
-                {2, 1, 2, 3},
-                {0, 3, 3, 3}
-        };
+    /**
+     * 47.创新工场：
+     * 求一个数组的最长递减子序列 比如{9，4，3，2，5，4，3，2}的最长递减子序列为{9，5，4，3，2}
+     *
+     * @param arr
+     */
+    static void subMaxSeq(int[] arr) {
+        List<Integer> list = new ArrayList<Integer>();
+        List<Integer> tmpList = new ArrayList<Integer>();
+        for (int i = 0; i < arr.length; i++) {
 
-        int[] order = {0, 3, 2, 1};
-        int[] result = new int[order.length];
-        google36(w, order, result);
+            for (int j = 0; j < arr.length; j++) {
+                if (tmpList.size() > 0) {
+                    if (tmpList.get(tmpList.size() - 1) > arr[j]) {
+                        tmpList.add(arr[j]);
+                    }
+                } else {
+                    tmpList.add(arr[j]);
+                }
+            }
+
+        }
+
+//        if (list.size() < tmpList.size()) {
+//            list = new ArrayList<Integer>();
+        for (Integer l : tmpList) {
+            System.out.print(l + ", ");
+            list.add(l);
+        }
+//        }
+        System.out.println();
+    }
+
+
+    public static void main(String[] args) {
+        // google36
+//        int[][] w = {
+//                {0, 0, 2, 0},
+//                {0, 1, 1, 3},
+//                {2, 1, 2, 3},
+//                {0, 3, 3, 3}
+//        };
+//
+//        int[] order = {0, 3, 2, 1};
+//        int[] result = new int[order.length];
+//        google36(w, order, result);
+
+        // subMaxSeq
+        int[] arr = {6, 9, 4, 3, 2, 5, 4, 3, 2};
+        subMaxSeq(arr);
+
     }
 }
