@@ -2,6 +2,7 @@ package com.alfer.algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created on 2016/9/19
@@ -27,6 +28,7 @@ public class BinaryTreeNode implements Cloneable {
 
     /**
      * 前序（根）遍历
+     * 递归实现
      * current -> left -> right
      *
      * @param btn
@@ -40,6 +42,33 @@ public class BinaryTreeNode implements Cloneable {
             if (btn.rightNode != null) {
                 preOrderTraversal(btn.rightNode);
             }
+        }
+
+    }
+
+    /**
+     * 前序（根）遍历
+     * 非递归实现：使用栈
+     *
+     * @param btn
+     */
+    void preOrderTraversal2(BinaryTreeNode btn) {
+        System.out.println();
+        Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
+        stack.push(btn);
+
+        while (!stack.isEmpty()) {
+            BinaryTreeNode node = stack.pop();
+            System.out.print(node.value + ", ");
+
+            if (node.rightNode != null) {
+                stack.push(node.rightNode);
+            }
+
+            if (node.leftNode != null) {
+                stack.push(node.leftNode);
+            }
+
         }
     }
 
@@ -151,7 +180,8 @@ public class BinaryTreeNode implements Cloneable {
         BinaryTreeNode tree1 = new BinaryTreeNode(1, tree2, tree3);
 
         // 先序遍历
-//        tree1.preOrderTraversal(tree1);
+        tree1.preOrderTraversal(tree1);
+        tree1.preOrderTraversal2(tree1);
         // 中序遍历
 //        tree1.inOrderTraversal(tree1);
         // 后序遍历
@@ -163,12 +193,11 @@ public class BinaryTreeNode implements Cloneable {
 //        tree1.levelOrderTraversal(list);
 
         // 二叉树镜像
-//        BinaryTreeNode copyTree = (BinaryTreeNode) tree1.clone();
-        tree1.preOrderTraversal(tree1);
-        System.out.println();
-        System.out.println("===================");
-        tree1.mirrorTree(tree1);
-        tree1.preOrderTraversal(tree1);
+//        tree1.preOrderTraversal(tree1);
+//        System.out.println();
+//        System.out.println("===================");
+//        tree1.mirrorTree(tree1);
+//        tree1.preOrderTraversal(tree1);
 
     }
 
