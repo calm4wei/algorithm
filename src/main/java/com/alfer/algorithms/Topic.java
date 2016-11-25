@@ -73,32 +73,51 @@ public class Topic {
      * @param arr
      */
     static void subMaxSeq(int[] arr) {
-        List<Integer> list = new ArrayList<Integer>();
-        List<Integer> tmpList = new ArrayList<Integer>();
-        for (int i = 0; i < arr.length; i++) {
-
-            for (int j = 0; j < arr.length; j++) {
-                if (tmpList.size() > 0) {
-                    if (tmpList.get(tmpList.size() - 1) > arr[j]) {
-                        tmpList.add(arr[j]);
-                    }
-                } else {
-                    tmpList.add(arr[j]);
-                }
-            }
-
-        }
-
-//        if (list.size() < tmpList.size()) {
-//            list = new ArrayList<Integer>();
-        for (Integer l : tmpList) {
-            System.out.print(l + ", ");
-            list.add(l);
-        }
-//        }
-        System.out.println();
     }
 
+
+    /**
+     * 遍历最长递减子序列，递归法 A - 源序列数组
+     * B - 通过DP求出的辅助数组
+     * k - 使得B[i]最大的i值
+     */
+    static void max_dec_subseq_traverse(int[] A, int[] B, int k) {
+        int i;
+        for (i = k; i >= 0; i--) {
+            if (A[i] > A[k] && B[k] == B[i] + 1) {
+                max_dec_subseq_traverse(A, B, i);
+                break;
+            }
+        }
+        System.out.println("A[" + k + "]=" + A[k]);
+    }
+
+    /**
+     * 47.创新工场：
+     * 求一个数组的最长递减子序列 比如{9，4，3，2，5，4，3，2}的最长递减子序列为{9，5，4，3，2}
+     * <p>
+     * <p>
+     * 参考：http://blog.csdn.net/army_war/article/details/38236085
+     * <p>
+     * DP(动态规划)法求解最长递减子序列
+     * A - 源序列数组
+     * len - 数组大小
+     */
+    static void max_dec_subseq(int[] A, int len) {
+        int i, j, max_i = 0;
+        int[] B = new int[len];
+        for (i = 0; i < len; i++) {
+            B[i] = 1;
+            for (j = 0; j < i; j++) {
+                if (A[j] > A[i] && (B[j] + 1) > B[i]) {
+                    B[i] = B[j] + 1;
+                    if (B[i] > B[max_i])
+                        max_i = i;
+                }
+            }
+        }
+        max_dec_subseq_traverse(A, B, max_i);
+    }
 
     public static void main(String[] args) {
         // google36
@@ -115,7 +134,7 @@ public class Topic {
 
         // subMaxSeq
         int[] arr = {6, 9, 4, 3, 2, 5, 4, 3, 2};
-        subMaxSeq(arr);
+        max_dec_subseq(arr, arr.length);
 
     }
 }
