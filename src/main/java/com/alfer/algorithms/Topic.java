@@ -119,6 +119,78 @@ public class Topic {
         max_dec_subseq_traverse(A, B, max_i);
     }
 
+
+    /**
+     * 51.和为n连续正数序列。
+     * 题目：输入一个正数n，输出所有和为n连续正数序列。
+     * <p>
+     * 例如输入15，由于1+2+3+4+5=4+5+6=7+8=15，所以输出3个连续序列1-5、4-6和7-8。
+     * 分析：这是网易的一道面试题。
+     */
+    static void byWangyi_51(int[] a, int target) {
+        List<List<Integer>> lists = new ArrayList<List<Integer>>();
+        int middle = 0;
+        if (a.length % 2 == 0) {
+            middle = a.length / 2;
+        } else {
+            middle = a.length / 2 + 1;
+        }
+        int sum = 0;
+        for (int j = 0; j < middle; j++) {
+            List<Integer> list = new ArrayList<Integer>();
+            sum = 0;
+            for (int i = j; i < middle; i++) {
+                sum += a[i];
+                list.add(a[i]);
+                if (target == sum) {
+                    lists.add(list);
+                    break;
+                }
+            }
+        }
+
+        for (List<Integer> list : lists) {
+            for (Integer l : list) {
+                System.out.printf(l + ", ");
+            }
+            System.out.println();
+        }
+    }
+
+
+    /**
+     * 54.调整数组顺序使奇数位于偶数前面。
+     * <p>
+     * 题目：输入一个整数数组，调整数组中数字的顺序，使得所有奇数位于数组的前半部分，
+     * 所有偶数位于数组的后半部分。要求时间复杂度为O(n)。
+     *
+     * @param a
+     */
+    static void adjustOrder(int[] a) {
+        List<Integer> odd = new ArrayList<Integer>();
+        List<Integer> event = new ArrayList<Integer>();
+        int[] bs = new int[a.length];
+        for (int i : a) {
+            if (i % 2 == 0) {
+                event.add(i);
+            } else {
+                odd.add(i);
+            }
+        }
+
+        for (int i = 0; i < odd.size(); i++) {
+            bs[i] = odd.get(i);
+        }
+        int oddLength = odd.size();
+        for (int i = 0; i < event.size(); i++) {
+            bs[i + oddLength] = event.get(i);
+        }
+        for (int b : bs) {
+            System.out.printf(b + ", ");
+        }
+
+    }
+
     public static void main(String[] args) {
         // google36
 //        int[][] w = {
@@ -136,5 +208,15 @@ public class Topic {
         int[] arr = {6, 9, 4, 3, 2, 5, 4, 3, 2};
         max_dec_subseq(arr, arr.length);
 
+
+        // 51
+        int n = 15;
+        int[] a = new int[n];
+        for (int i = 1; i < n; i++) {
+            a[i - 1] = i;
+        }
+        byWangyi_51(a, n);
+
+        adjustOrder(a);
     }
 }
