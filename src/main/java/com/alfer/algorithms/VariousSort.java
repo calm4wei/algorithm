@@ -82,7 +82,7 @@ public class VariousSort {
 
 
     public static void main(String[] args) {
-        int[] a = {5, 10, 4, 6, 9, 3, 2, 7};
+        int[] a = {5, 10, 4, 6, 9, 3, 2, 7, 10, 11};
 //        insertSort(a);
         quickSort(a, 0, a.length - 1);
         for (int i : a) {
