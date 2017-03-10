@@ -1,5 +1,7 @@
 package com.alfer.algorithms;
 
+import com.alfer.util.NumberUtils;
+
 /**
  * Created on 2016/9/30
  * 排序算法
@@ -81,10 +83,42 @@ public class VariousSort {
     }
 
 
+    /**
+     * 算法导论 7.1 第95页
+     *
+     * @param a
+     * @param p
+     * @param r
+     * @return
+     */
+    public static int partition(int[] a, int p, int r) {
+        int x = a[r];
+        int i = p - 1;
+        for (int j = p; j <= r - 1; j++) {
+            if (a[j] <= x) {
+                i++;
+                NumberUtils.swap(a, i, j);
+            }
+        }
+        NumberUtils.swap(a, i + 1, r);
+        return i + 1;
+    }
+
+    public static void quickSort_intro(int[] a, int p, int r) {
+        if (r < p)
+            return;
+
+        int q = partition(a, p, r);
+        quickSort(a, p, q - 1);
+        quickSort(a, q + 1, r);
+
+    }
+
     public static void main(String[] args) {
-        int[] a = {5, 10, 4, 6, 9, 3, 2, 7, 10, 11};
+        int[] a = {1, 10, 4, 6, 9, 3, 2, 7, 10, 11};
 //        insertSort(a);
-        quickSort(a, 0, a.length - 1);
+//        quickSort(a, 0, a.length - 1);
+        quickSort_intro(a, 0, a.length - 1);
         for (int i : a) {
             System.out.print(i + ",");
         }
