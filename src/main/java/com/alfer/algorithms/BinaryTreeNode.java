@@ -95,6 +95,28 @@ public class BinaryTreeNode implements Cloneable {
     }
 
     /**
+     * 中序遍历的非递归实现：使用栈作为辅助数据结构。
+     * left -> current -> right
+     *
+     * @param btn
+     */
+    void inOrderTraversal2(BinaryTreeNode btn) {
+        System.out.println();
+        Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>();
+        BinaryTreeNode node = btn;
+        while (node != null || !stack.isEmpty()) {
+            if (node != null) {// 压入node.left
+                stack.push(node); // 先压入node，后压入node.left
+                node = node.leftNode;
+            } else {
+                node = stack.pop(); // 先弹出，后压入node.right
+                System.out.print(node.value + ", ");
+                node = node.rightNode;
+            }
+        }
+    }
+
+    /**
      * 后序（根 ）遍历
      * left -> right -> current
      *
@@ -180,10 +202,11 @@ public class BinaryTreeNode implements Cloneable {
         BinaryTreeNode tree1 = new BinaryTreeNode(1, tree2, tree3);
 
         // 先序遍历
-        tree1.preOrderTraversal(tree1);
-        tree1.preOrderTraversal2(tree1);
+//        tree1.preOrderTraversal(tree1);
+//        tree1.preOrderTraversal2(tree1);
         // 中序遍历
-//        tree1.inOrderTraversal(tree1);
+        tree1.inOrderTraversal(tree1);
+        tree1.inOrderTraversal2(tree1);
         // 后序遍历
 //        tree1.postOrderTraversal(tree1);
 
