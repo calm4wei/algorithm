@@ -18,17 +18,14 @@ public class VariousSort {
      * @return
      */
     public static int[] insertSort(int[] a) {
-        for (int i = 1; i < a.length; i++) {
-            for (int j = 0; j < i; j++) {
-                if (a[i] < a[j]) {
-                    int tmp = a[i];
-                    for (int k = i; k > j; k--) {
-                        a[k] = a[k - 1];
-                    }
-                    a[j] = tmp;
-                    break;
-                }
+        for (int j = 1; j < a.length; j++) {
+            int key = a[j];
+            int i = j - 1;
+            while (i >= 0 && a[i] > key) {
+                a[i + 1] = a[i];
+                i = i - 1;
             }
+            a[i + 1] = key;
         }
         return a;
     }
@@ -117,6 +114,10 @@ public class VariousSort {
     public static void main(String[] args) {
         int[] a = {1, 10, 4, 6, 9, 3, 2, 7, 10, 11};
 //        insertSort(a);
+//        for (int i : a) {
+//            System.out.print(i + ",");
+//        }
+        System.out.println("==========");
 //        quickSort(a, 0, a.length - 1);
         quickSort_intro(a, 0, a.length - 1);
         for (int i : a) {

@@ -127,13 +127,10 @@ public class BinaryTreeNode implements Cloneable {
             if (btn.leftNode != null) {
                 postOrderTraversal(btn.leftNode);
             }
-//            System.out.print("Left tree traversal is over.");
             if (btn.rightNode != null) {
                 postOrderTraversal(btn.rightNode);
             }
-//            System.out.print("Right tree traversal is over.");
             System.out.print(btn.value + ", ");
-//            System.out.print("Root tree traversal is over.");
         }
     }
 
